@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sushan Sitikhu — Data Entry Specialist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f3ef; --white: #ffffff; --ink: #1a1a1a; --ink2: #3d3d3d;
+      --muted: #888680; --accent: #1a3a5c; --accent2: #2e6da4;
+      --gold: #b8975a; --border: #dedad4; --surface: #eeeae4;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.6; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(245,243,239,0.94); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 4rem; display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--accent); letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 72px; }
+    .hero-left {
+      background: var(--accent); display: flex; flex-direction: column;
+      justify-content: center; padding: 5rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero-left::before { content:''; position:absolute; top:-80px; right:-80px; width:320px; height:320px; border:1px solid rgba(255,255,255,0.07); border-radius:50%; }
+    .hero-left::after  { content:''; position:absolute; bottom:-50px; left:-50px; width:200px; height:200px; border:1px solid rgba(255,255,255,0.05); border-radius:50%; }
+    .hero-eyebrow { font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem; display:flex; align-items:center; gap:0.75rem; }
+    .hero-eyebrow::before { content:''; display:block; width:32px; height:1px; background:var(--gold); }
+    .hero-name { font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,5vw,4.5rem); font-weight:600; color:#fff; line-height:1.05; letter-spacing:-0.01em; margin-bottom:0.5rem; }
+    .hero-name span { font-style:italic; color:rgba(255,255,255,0.6); }
+    .hero-title { font-size:0.9rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:2.5rem; }
+    .hero-desc { font-size:0.97rem; color:rgba(255,255,255,0.7); max-width:380px; line-height:1.85; margin-bottom:3rem; }
+    .available-badge { display:inline-flex; align-items:center; gap:0.6rem; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); padding:0.6rem 1.2rem; border-radius:100px; font-size:0.78rem; color:rgba(255,255,255,0.7); }
+    .dot { width:7px; height:7px; background:#4ade80; border-radius:50%; animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .hero-right { background:var(--white); display:flex; flex-direction:column; justify-content:center; padding:5rem 4rem; }
+    .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5px; background:var(--border); border:1px solid var(--border); margin-bottom:3rem; }
+    .stat-box { background:var(--white); padding:2rem 1.75rem; }
+    .stat-num { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:600; color:var(--accent); line-height:1; margin-bottom:0.4rem; }
+    .stat-label { font-size:0.72rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; }
+    .hero-cta { display:flex; gap:1rem; flex-wrap:wrap; }
+    .btn { padding:0.9rem 2rem; font-family:'Outfit',sans-serif; font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; border-radius:2px; transition:all 0.25s; cursor:pointer; border:none; }
+    .btn-dark { background:var(--accent); color:#fff; font-weight:500; }
+    .btn-dark:hover { background:var(--accent2); }
+    .btn-ghost { background:transparent; color:var(--ink); border:1px solid var(--border); }
+    .btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
+
+    .divider { height:1px; background:var(--border); margin:0 4rem; }
+    section { padding:6rem 4rem; }
+    .sec-label { font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:0.75rem; display:flex; align-items:center; gap:0.75rem; }
+    .sec-label::after { content:''; flex:1; height:1px; background:var(--border); }
+    .sec-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,3.5vw,2.8rem); font-weight:600; line-height:1.15; margin-bottom:1rem; }
+    .sec-sub { color:var(--muted); max-width:520px; line-height:1.8; font-size:0.95rem; margin-bottom:3.5rem; }
+
+    .about { background:var(--white); }
+    .about-inner { display:grid; grid-template-columns:1.2fr 1fr; gap:5rem; align-items:start; }
+    .about-text p { color:var(--ink2); line-height:1.9; margin-bottom:1.25rem; font-size:0.97rem; }
+    .about-text p strong { color:var(--accent); font-weight:600; }
+    .quote-block { border-left:2px solid var(--gold); padding:1.25rem 1.75rem; margin:2rem 0; background:var(--bg); }
+    .quote-block p { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; color:var(--accent); line-height:1.6; margin:0!important; }
+    .info-list { list-style:none; }
+    .info-item { display:flex; justify-content:space-between; align-items:center; padding:1.1rem 0; border-bottom:1px solid var(--border); font-size:0.88rem; }
+    .info-item:first-child { border-top:1px solid var(--border); }
+    .info-key { color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; font-size:0.72rem; }
+    .info-val { color:var(--ink); font-weight:500; }
+    .badge-avail { display:inline-flex; align-items:center; gap:0.4rem; background:#f0fdf4; border:1px solid #bbf7d0; color:#166534; padding:0.25rem 0.75rem; border-radius:100px; font-size:0.72rem; }
+
+    .skills { background:var(--bg); }
+    .skills-layout { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+    .skill-group { border:1px solid var(--border); background:var(--white); padding:2rem; }
+    .skill-group-title { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:1px solid var(--border); }
+    .skill-row { display:flex; flex-direction:column; gap:1rem; }
+    .skill-item { display:flex; flex-direction:column; gap:0.4rem; }
+    .skill-name { font-size:0.85rem; color:var(--ink2); display:flex; justify-content:space-between; }
+    .skill-pct { font-size:0.75rem; color:var(--muted); }
+    .skill-bar { height:3px; background:var(--border); border-radius:2px; overflow:hidden; }
+    .skill-fill { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); border-radius:2px; width:0; transition:width 1.2s cubic-bezier(0.4,0,0.2,1); }
+    .tag-cloud { display:flex; flex-wrap:wrap; gap:0.6rem; }
+    .tag { padding:0.45rem 1rem; border:1px solid var(--border); font-size:0.8rem; color:var(--ink2); border-radius:2px; background:var(--bg); transition:all 0.2s; }
+    .tag:hover { border-color:var(--accent); color:var(--accent); background:#fff; }
+
+    .services { background:var(--accent); }
+    .services .sec-label { color:var(--gold); }
+    .services .sec-label::after { background:rgba(255,255,255,0.1); }
+    .services .sec-title { color:#fff; }
+    .services .sec-sub { color:rgba(255,255,255,0.6); }
+    .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,0.08); }
+    .service-card { background:var(--accent); padding:2.5rem 2rem; border:1px solid rgba(255,255,255,0.07); transition:background 0.3s; }
+    .service-card:hover { background:var(--accent2); }
+    .service-icon { width:44px; height:44px; border:1px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; margin-bottom:1.5rem; font-size:1.25rem; }
+    .service-title { font-size:1rem; color:#fff; font-weight:500; margin-bottom:0.75rem; }
+    .service-desc { font-size:0.85rem; color:rgba(255,255,255,0.55); line-height:1.8; }
+
+    .contact { background:var(--white); }
+    .contact-inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+    .contact-info { display:flex; flex-direction:column; gap:1.5rem; margin-top:1rem; }
+    .contact-row { display:flex; gap:1.25rem; align-items:flex-start; padding:1.5rem; border:1px solid var(--border); background:var(--bg); transition:border-color 0.2s; }
+    .contact-row:hover { border-color:var(--accent); }
+    .contact-icon { width:40px; height:40px; min-width:40px; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1rem; }
+    .contact-detail-label { font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:0.25rem; }
+    .contact-detail-val { font-size:0.92rem; color:var(--ink); font-weight:500; }
+    .contact-detail-val a { color:var(--accent2); text-decoration:none; }
+    .contact-detail-val a:hover { text-decoration:underline; }
+    .contact-form { display:flex; flex-direction:column; gap:1rem; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .form-group { display:flex; flex-direction:column; gap:0.4rem; }
+    .form-label { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+    .form-input, .form-textarea { font-family:'Outfit',sans-serif; font-size:0.9rem; color:var(--ink); background:var(--bg); border:1px solid var(--border); padding:0.85rem 1rem; border-radius:2px; outline:none; transition:border-color 0.2s; resize:none; }
+    .form-input:focus, .form-textarea:focus { border-color:var(--accent); background:#fff; }
+    .form-textarea { min-height:130px; }
+    #form-status { font-size:0.85rem; color:#166534; display:none; margin-top:0.5rem; }
+
+    footer { background:var(--ink); padding:2rem 4rem; display:flex; justify-content:space-between; align-items:center; }
+    .footer-name { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:rgba(255,255,255,0.7); }
+    .footer-copy { font-size:0.75rem; color:rgba(255,255,255,0.3); letter-spacing:0.08em; }
+
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    @media(max-width:900px){
+      nav { padding:1rem 1.5rem; } .nav-links { display:none; }
+      .hero { grid-template-columns:1fr; }
+      .hero-left,.hero-right { padding:4rem 1.5rem; }
+      section { padding:4rem 1.5rem; }
+      .about-inner,.contact-inner { grid-template-columns:1fr; gap:2.5rem; }
+      .skills-layout,.services-grid { grid-template-columns:1fr; }
+      .form-row { grid-template-columns:1fr; }
+      .divider { margin:0 1.5rem; }
+      footer { flex-direction:column; gap:0.5rem; text-align:center; padding:2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Sushan Sitikhu</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Data Entry Specialist</div>
+    <h1 class="hero-name">Sushan<br/><span>Sitikhu</span></h1>
+    <div class="hero-title">Accuracy · Speed · Reliability</div>
+    <p class="hero-desc">Professional data entry specialist based in Nepal, delivering accurate, well-organized, and timely data solutions for businesses worldwide.</p>
+    <div class="available-badge"><div class="dot"></div> Available for freelance &amp; full-time work</div>
+  </div>
+  <div class="hero-right">
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-num">99%</div><div class="stat-label">Accuracy Rate</div></div>
+      <div class="stat-box"><div class="stat-num">60+</div><div class="stat-label">WPM Typing Speed</div></div>
+      <div class="stat-box"><div class="stat-num">100%</div><div class="stat-label">Deadline Adherence</div></div>
+      <div class="stat-box"><div class="stat-num">NP</div><div class="stat-label">Based in Nepal</div></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-dark">Hire Me</a>
+      <a href="#skills" class="btn btn-ghost">View Skills</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="reveal">
+      <div class="sec-label">About Me</div>
+      <h2 class="sec-title">Dedicated to data<br/>done right</h2>
+      <div class="about-text">
+        <p>I'm <strong>Sushan Sitikhu</strong>, a detail-oriented Data Entry Specialist from Nepal with a strong commitment to accuracy, confidentiality, and efficiency in every task I undertake.</p>
+        <p>I specialize in handling large volumes of data with precision — whether it's entering records into spreadsheets, managing databases, transcribing documents, or performing data verification and cleanup.</p>
+        <div class="quote-block"><p>"Good data is the foundation of every good decision."</p></div>
+        <p>I understand that your data is valuable. That's why I treat every project with the highest level of care, ensuring information is entered correctly the first time — saving you time and resources.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <ul class="info-list">
+        <li class="info-item"><span class="info-key">Full Name</span><span class="info-val">Sushan Sitikhu</span></li>
+        <li class="info-item"><span class="info-key">Location</span><span class="info-val">Nepal 🇳🇵</span></li>
+        <li class="info-item"><span class="info-key">Profession</span><span class="info-val">Data Entry Specialist</span></li>
+        <li class="info-item"><span class="info-key">Typing Speed</span><span class="info-val">60+ WPM</span></li>
+        <li class="info-item"><span class="info-key">Languages</span><span class="info-val">Nepali, English</span></li>
+        <li class="info-item"><span class="info-key">Availability</span><span class="info-val"><span class="badge-avail"><span class="dot"></span> Open to Work</span></span></li>
+        <li class="info-item"><span class="info-key">Website</span><span class="info-val">sushansitikhu.com.np</span></li>
+      </ul>
+      <br/>
+      <a href="#contact" class="btn btn-dark" style="display:inline-block">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <div class="sec-label reveal">Skills &amp; Tools</div>
+  <h2 class="sec-title reveal">What I bring<br/>to the table</h2>
+  <p class="sec-sub reveal">Proficiency built through consistent practice and real-world application across a wide range of data tasks.</p>
+  <div class="skills-layout">
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Core Competencies</div>
+      <div class="skill-row">
+        <div class="skill-item">
+          <div class="skill-name"><span>Data Entry Accuracy</span><span class="skill-pct">99%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-w="99"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name"><span>Typing Speed</span><span class="skill-pct">90%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-w="90"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name"><span>Data Verification &amp; QC</span><span class="skill-pct">95%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-w="95"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name"><span>Document Transcription</span><span class="skill-pct">92%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-w="92"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name"><span>Database Management</span><span class="skill-pct">85%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-w="85"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Tools &amp; Software</div>
+      <div class="tag-cloud">
+        <span class="tag">Microsoft Excel</span>
+        <span class="tag">Microsoft Word</span>
+        <span class="tag">Google Sheets</span>
+        <span class="tag">Google Docs</span>
+        <span class="tag">PDF Tools</span>
+        <span class="tag">Data Cleaning</span>
+        <span class="tag">CSV / TSV</span>
+        <span class="tag">Online Forms</span>
+        <span class="tag">Internet Research</span>
+        <span class="tag">Email Management</span>
+        <span class="tag">Attention to Detail</span>
+        <span class="tag">Confidentiality</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="sec-label reveal">What I Offer</div>
+  <h2 class="sec-title reveal">Services</h2>
+  <p class="sec-sub reveal">Reliable data solutions tailored to your business needs — delivered on time, every time.</p>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">📋</div>
+      <div class="service-title">Data Entry</div>
+      <p class="service-desc">Fast, accurate entry of data into spreadsheets, databases, or online platforms from any source — physical or digital.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🔍</div>
+      <div class="service-title">Data Verification</div>
+      <p class="service-desc">Cross-checking, cleaning, and validating existing datasets to eliminate errors and ensure data integrity.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📄</div>
+      <div class="service-title">Document Transcription</div>
+      <p class="service-desc">Converting handwritten notes, scanned PDFs, or audio content into clean, typed digital documents.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📊</div>
+      <div class="service-title">Spreadsheet Management</div>
+      <p class="service-desc">Creating, formatting, and organizing Excel or Google Sheets files for clear data presentation and reporting.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🌐</div>
+      <div class="service-title">Web Research</div>
+      <p class="service-desc">Gathering, compiling, and organizing information from online sources into structured and usable formats.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📬</div>
+      <div class="service-title">Email &amp; Contact Lists</div>
+      <p class="service-desc">Building, updating, and managing accurate contact databases and mailing lists for outreach campaigns.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="sec-label reveal">Contact</div>
+      <h2 class="sec-title reveal">Let's work<br/>together</h2>
+      <p class="sec-sub reveal" style="margin-bottom:2rem">Ready to get your data organized? Send me a message and I'll get back to you promptly.</p>
+      <div class="contact-info">
+        <div class="contact-row reveal">
+          <div class="contact-icon">📍</div>
+          <div><div class="contact-detail-label">Location</div><div class="contact-detail-val">Nepal 🇳🇵</div></div>
+        </div>
+        <div class="contact-row reveal">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-detail-label">Email</div>
+            <div class="contact-detail-val"><a href="mailto:sushan@sushansitikhu.com.np">sushan@sushansitikhu.com.np</a></div>
+          </div>
+        </div>
+        <div class="contact-row reveal">
+          <div class="contact-icon">🕐</div>
+          <div><div class="contact-detail-label">Response Time</div><div class="contact-detail-val">Within 24 hours</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input class="form-input" type="text" id="f-name" placeholder="John Doe"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input class="form-input" type="email" id="f-email" placeholder="john@example.com"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <input class="form-input" type="text" id="f-subject" placeholder="Data Entry Project Inquiry"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" id="f-msg" placeholder="Tell me about your project — the type of data, volume, and deadline..."></textarea>
+        </div>
+        <button class="btn btn-dark" onclick="handleSubmit()" style="width:100%;padding:1rem;font-size:0.82rem">Send Message</button>
+        <div id="form-status">✅ Thank you! Opening your email client...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Sushan Sitikhu</div>
+  <div class="footer-copy">© 2026 · Data Entry Specialist · Nepal</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*70); });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => obs.observe(el));
+
+  const bars = document.querySelectorAll('.skill-fill');
+  const barObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.style.width = e.target.dataset.w + '%'; });
+  }, { threshold: 0.3 });
+  bars.forEach(b => barObs.observe(b));
+
+  function handleSubmit() {
+    const name = document.getElementById('f-name').value;
+    const email = document.getElementById('f-email').value;
+    const msg = document.getElementById('f-msg').value;
+    if(!name || !email || !msg){ alert('Please fill in all required fields.'); return; }
+    document.getElementById('form-status').style.display = 'block';
+    const sub = document.getElementById('f-subject').value || 'Portfolio Inquiry';
+    window.location.href = `mailto:sushan@sushansitikhu.com.np?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent('From: '+name+'\nEmail: '+email+'\n\n'+msg)}`;
+  }
+</script>
+</body>
+</html>
